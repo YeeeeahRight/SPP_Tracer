@@ -19,7 +19,12 @@ namespace Application.View
         public void Print(TraceResult traceResult)
         {
             _fileName += _traceSerializer.GetFileExtension();
-            File.WriteAllText(_fileName, _traceSerializer.Serialize(traceResult));
+            var result = traceResult.ToString();
+            if (_traceSerializer != null)
+            {
+                result = _traceSerializer.Serialize(traceResult);
+            }
+            File.WriteAllText(_fileName, result);
         }
 
         public void SetTraceSerializer(ITraceSerializer traceSerializer)

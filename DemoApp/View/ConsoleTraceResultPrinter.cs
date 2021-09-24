@@ -15,7 +15,13 @@ namespace Application.View
         
         public void Print(TraceResult traceResult)
         {
-            Console.WriteLine(_traceSerializer.Serialize(traceResult));
+            var result = traceResult.ToString();
+            if (_traceSerializer != null)
+            {
+                result = _traceSerializer.Serialize(traceResult);
+            }
+
+            Console.WriteLine(result);
         }
         
         public void SetTraceSerializer(ITraceSerializer traceSerializer)
